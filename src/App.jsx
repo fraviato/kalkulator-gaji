@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { 
   MapPin, 
   Wallet, 
@@ -691,6 +692,7 @@ export default function SalaryMapApp() {
            </a>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
