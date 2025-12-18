@@ -670,7 +670,7 @@ export default function SalaryMapApp() {
                     </div>
                     
                     <div className="text-xs text-slate-400 italic text-center mt-4">
-                         Data pengeluaran/kapita yang ada di website ini diambil dari <a href="https://www.bps.go.id/id/statistics-table/3/V1ZKMWVrSTNOek5ZZUZOcVZEZGFValJvV0hWalFUMDkjMw==/rata-rata-pengeluaran-per-kapita-sebulan-makanan-dan-bukan-makanan-di-daerah-perkotaan-dan-perdesaan-menurut-provinsi--rupiah---2024.html?year=2024" target="_blank" rel="noopener noreferrer" className="text-[#6155F5] hover:underline">Laporan Statistik Konsumsi & Pendapatan BPS 2024</a>.
+                         Data pengeluaran/kapita yang ada di website ini diambil dari <a href="https://www.bps.go.id/id/statistics-table/1/OTQ1IzE=/rata-rata-pengeluaran-per-kapita-sebulan-untuk-makanan-dan-bukan-makanan-di-daerah-perkotaan-dan-perdesaan-menurut-provinsi--rupiah---2011-2025.html" target="_blank" rel="noopener noreferrer" className="text-[#6155F5] hover:underline">Laporan Statistik Pengeluaran per Kapita Sebulan di Daerah Perkotaan dan Perdesaan Menurut Provinsi 2025 </a>.
                     </div>
                   </div>
                 </div>
