@@ -19,62 +19,57 @@ import {
   Database,
   X,
   Save,
-  MessageCircle 
+  MessageCircle,
+  RotateCcw
 } from 'lucide-react';
 
-// --- DATA INITIAL (MANUAL UPDATE USER REQUEST) ---
+// --- DATA INITIAL (38 PROVINSI - FIXED VALUES SESUAI CSV BPS 2025) ---
 const INITIAL_PROVINCES = [
   // SUMATERA
-  { id: 'ACEH', name: 'Aceh', umr: 3685616, expense: 1264733 },
-  { id: 'SUMUT', name: 'Sumatera Utara', umr: 2992559, expense: 1340957 },
-  { id: 'SUMBAR', name: 'Sumatera Barat', umr: 2994193, expense: 1480853 },
-  { id: 'RIAU', name: 'Riau', umr: 3508776, expense: 1563165 },
-  { id: 'JAMBI', name: 'Jambi', umr: 3234535, expense: 1472501 },
-  { id: 'SUMSEL', name: 'Sumatera Selatan', umr: 3681571, expense: 1289001 },
-  { id: 'BENGKULU', name: 'Bengkulu', umr: 2670039, expense: 1415976 },
-  { id: 'LAMPUNG', name: 'Lampung', umr: 2893070, expense: 1201473 },
-  { id: 'BABEL', name: 'Kep. Bangka Belitung', umr: 3876600, expense: 1793074 },
-  { id: 'KEPRI', name: 'Kepulauan Riau', umr: 3623654, expense: 2109071 },
-  
+  { id: 'ACEH', name: 'Aceh', umr: 3685616, expense: 1299756 },
+  { id: 'SUMUT', name: 'Sumatera Utara', umr: 2992559, expense: 1397887 },
+  { id: 'SUMBAR', name: 'Sumatera Barat', umr: 2994193, expense: 1542109 },
+  { id: 'RIAU', name: 'Riau', umr: 3508776, expense: 1610427 },
+  { id: 'JAMBI', name: 'Jambi', umr: 3234535, expense: 1477104 },
+  { id: 'SUMSEL', name: 'Sumatera Selatan', umr: 3681571, expense: 1283538 },
+  { id: 'BENGKULU', name: 'Bengkulu', umr: 2670039, expense: 1498744 },
+  { id: 'LAMPUNG', name: 'Lampung', umr: 2893070, expense: 1239613 },
+  { id: 'BABEL', name: 'Kep. Bangka Belitung', umr: 3876600, expense: 1765551 },
+  { id: 'KEPRI', name: 'Kepulauan Riau', umr: 3623654, expense: 2468319 },
   // JAWA & BALI NUSA
-  { id: 'DKI', name: 'DKI Jakarta', umr: 5396761, expense: 2794485 },
-  { id: 'JABAR', name: 'Jawa Barat', umr: 2191232, expense: 1633032 },
-  { id: 'JATENG', name: 'Jawa Tengah', umr: 2169349, expense: 1271678 },
-  { id: 'DIY', name: 'DI Yogyakarta', umr: 2264080, expense: 1758865 },
-  { id: 'JATIM', name: 'Jawa Timur', umr: 2305985, expense: 1356943 },
-  { id: 'BANTEN', name: 'Banten', umr: 2905119, expense: 1772162 },
-  { id: 'BALI', name: 'Bali', umr: 2996561, expense: 1872760 },
-  { id: 'NTB', name: 'Nusa Tenggara Barat', umr: 2602931, expense: 1277139 },
-  { id: 'NTT', name: 'Nusa Tenggara Timur', umr: 2328969, expense: 975854 },
-  
+  { id: 'DKI', name: 'DKI Jakarta', umr: 5396761, expense: 2962412 },
+  { id: 'JABAR', name: 'Jawa Barat', umr: 2191232, expense: 1724367 },
+  { id: 'JATENG', name: 'Jawa Tengah', umr: 2169349, expense: 1337028 },
+  { id: 'DIY', name: 'DI Yogyakarta', umr: 2264080, expense: 1843212 },
+  { id: 'JATIM', name: 'Jawa Timur', umr: 2305985, expense: 1419140 },
+  { id: 'BANTEN', name: 'Banten', umr: 2905119, expense: 1750546 },
+  { id: 'BALI', name: 'Bali', umr: 2996561, expense: 1964618 },
+  { id: 'NTB', name: 'Nusa Tenggara Barat', umr: 2602931, expense: 1402118 },
+  { id: 'NTT', name: 'Nusa Tenggara Timur', umr: 2328969, expense: 1028875 },
   // KALIMANTAN
-  { id: 'KALBAR', name: 'Kalimantan Barat', umr: 2878286, expense: 1388077 },
-  { id: 'KALTENG', name: 'Kalimantan Tengah', umr: 3473621, expense: 1590691 },
-  { id: 'KALSEL', name: 'Kalimantan Selatan', umr: 3496195, expense: 1534039 },
-  { id: 'KALTIM', name: 'Kalimantan Timur', umr: 3579313, expense: 2042791 },
-  { id: 'KALTARA', name: 'Kalimantan Utara', umr: 3580160, expense: 1658042 },
-  
+  { id: 'KALBAR', name: 'Kalimantan Barat', umr: 2878286, expense: 1469934 },
+  { id: 'KALTENG', name: 'Kalimantan Tengah', umr: 3473621, expense: 1596165 },
+  { id: 'KALSEL', name: 'Kalimantan Selatan', umr: 3496195, expense: 1603501 },
+  { id: 'KALTIM', name: 'Kalimantan Timur', umr: 3579313, expense: 2117354 },
+  { id: 'KALTARA', name: 'Kalimantan Utara', umr: 3580160, expense: 1726451 },
   // SULAWESI
-  { id: 'SULUT', name: 'Sulawesi Utara', umr: 3775425, expense: 1382429 },
-  { id: 'SULTENG', name: 'Sulawesi Tengah', umr: 2915000, expense: 1231453 },
-  { id: 'SULSEL', name: 'Sulawesi Selatan', umr: 3657527, expense: 1283081 },
-  { id: 'SULTRA', name: 'Sulawesi Tenggara', umr: 3073551, expense: 1227163 },
-  { id: 'GORONTALO', name: 'Gorontalo', umr: 3221731, expense: 1262268 },
-  { id: 'SULBAR', name: 'Sulawesi Barat', umr: 3104430, expense: 1109589 },
-  
+  { id: 'SULUT', name: 'Sulawesi Utara', umr: 3775425, expense: 1410504 },
+  { id: 'SULTENG', name: 'Sulawesi Tengah', umr: 2915000, expense: 1256394 },
+  { id: 'SULSEL', name: 'Sulawesi Selatan', umr: 3657527, expense: 1358821 },
+  { id: 'SULTRA', name: 'Sulawesi Tenggara', umr: 3073551, expense: 1325085 },
+  { id: 'GORONTALO', name: 'Gorontalo', umr: 3221731, expense: 1315738 },
+  { id: 'SULBAR', name: 'Sulawesi Barat', umr: 3104430, expense: 1069314 },
   // MALUKU & PAPUA
-  { id: 'MALUKU', name: 'Maluku', umr: 3141700, expense: 1277569 },
-  { id: 'MALUT', name: 'Maluku Utara', umr: 3408000, expense: 1447310 },
-  
+  { id: 'MALUKU', name: 'Maluku', umr: 3141700, expense: 1398498 },
+  { id: 'MALUT', name: 'Maluku Utara', umr: 3408000, expense: 1492532 },
   // PAPUA RAYA
-  { id: 'PAPUA', name: 'Papua', umr: 4285850, expense: 1884103 },
-  { id: 'PAPUABAR', name: 'Papua Barat', umr: 3615000, expense: 1643488 },
-  
-  // Pemekaran
-  { id: 'PAPUSEL', name: 'Papua Selatan', umr: 4285850, expense: 1427090, parentMapId: 'PAPUA' },
-  { id: 'PAPUTENG', name: 'Papua Tengah', umr: 4285848, expense: 1487688, parentMapId: 'PAPUA' },
-  { id: 'PAPUPEG', name: 'Papua Pegunungan', umr: 4285847, expense: 1728475, parentMapId: 'PAPUA' },
-  { id: 'PAPUBARDA', name: 'Papua Barat Daya', umr: 3614000, expense: 1642730, parentMapId: 'PAPUABAR' },
+  { id: 'PAPUA', name: 'Papua', umr: 4285850, expense: 1810767 },
+  { id: 'PAPUABAR', name: 'Papua Barat', umr: 3615000, expense: 1705338 },
+  // Pemekaran (Tanpa parentMapId)
+  { id: 'PAPUSEL', name: 'Papua Selatan', umr: 4285850, expense: 1517419 },
+  { id: 'PAPUTENG', name: 'Papua Tengah', umr: 4285848, expense: 1459088 },
+  { id: 'PAPUPEG', name: 'Papua Pegunungan', umr: 4285847, expense: 1941997 },
+  { id: 'PAPUBARDA', name: 'Papua Barat Daya', umr: 3614000, expense: 1816875 },
 ];
 
 // --- GEOJSON MAP COMPONENT ---
@@ -88,7 +83,7 @@ const IndonesiaGeoMap = ({ selectedProvId, onSelectProvince }) => {
   const dragStart = useRef({ x: 0, y: 0 });
   const svgRef = useRef(null);
 
-  const GEOJSON_URL = "https://raw.githubusercontent.com/superpikar/indonesia-geojson/master/indonesia-province-simple.json";
+  const GEOJSON_URL = "https://gist.githubusercontent.com/denyherianto/aae0dd09837a4cfd7c834e28a5ed4b8c/raw/indonesia-38-provinces.geojson";
 
   useEffect(() => {
     fetch(GEOJSON_URL)
@@ -103,6 +98,7 @@ const IndonesiaGeoMap = ({ selectedProvId, onSelectProvince }) => {
       });
   }, []);
 
+  // Map Scroll Lock & Zoom Logic
   useEffect(() => {
     const svgElement = svgRef.current;
     if (!svgElement) return;
@@ -120,6 +116,7 @@ const IndonesiaGeoMap = ({ selectedProvId, onSelectProvince }) => {
     };
   }, [geoData]); 
 
+  // Projection Helper
   const project = (lon, lat) => {
     const width = 800;
     const height = 350;
@@ -152,40 +149,65 @@ const IndonesiaGeoMap = ({ selectedProvId, onSelectProvince }) => {
   };
 
   const getProvinceIdByFeature = (properties) => {
-    const geoName = properties.Propinsi || properties.NAME_1 || "";
+    const geoName = properties.Provinsi || properties.NAME_1 || properties.name || properties.PROVINSI || "";
     if (!geoName) return null;
     
-    let clean = geoName.toLowerCase().replace(/propinsi|provinsi/g, "").trim();
+    let clean = geoName.toLowerCase().trim();
+    clean = clean.replace(/^propinsi\s+/, "").replace(/^provinsi\s+/, "").replace(/^daerah istimewa\s+/, "").replace(/^di\s+/, "");
     clean = clean.replace("nusatenggara", "nusa tenggara");
 
-    if (clean === "aceh" || clean === "nad" || clean.includes("aceh")) return "ACEH";
-    if (clean === "banten" || clean.includes("banten")) return "BANTEN";
-    if (clean.includes("jakarta")) return "DKI";
-    if (clean.includes("yogyakarta") || clean.includes("jogja")) return "DIY";
-    if (clean.includes("bangka")) return "BABEL";
-    if (clean.includes("nusa tenggara barat")) return "NTB";
-    if (clean.includes("nusa tenggara timur")) return "NTT";
+    if (clean.includes("papua barat daya")) return "PAPUBARDA";
+    if (clean.includes("papua barat") && !clean.includes("daya")) return "PAPUABAR";
+    if (clean.includes("papua selatan")) return "PAPUSEL";
+    if (clean.includes("papua tengah")) return "PAPUTENG";
+    if (clean.includes("papua pegunungan")) return "PAPUPEG";
+    if (clean === "papua" || clean === "irian jaya") return "PAPUA";
+
+    if (clean.includes("kepulauan riau") || clean.includes("kep. riau")) return "KEPRI";
+    if (clean === "riau") return "RIAU"; 
+
+    if (clean.includes("bangka") || clean.includes("belitung")) return "BABEL";
+
     if (clean.includes("maluku utara")) return "MALUT";
     if (clean === "maluku") return "MALUKU";
-    if (clean.includes("irian jaya barat") || clean.includes("papua barat")) return "PAPUABAR";
-    if (clean.includes("irian") || clean === "papua") return "PAPUA"; 
-    
-    const match = INITIAL_PROVINCES.find(p => {
-      const pName = p.name.toLowerCase().replace("kepulauan", "").replace("kep.", "").trim();
-      const cleanNoKep = clean.replace("kepulauan", "").trim();
-      return pName === cleanNoKep || pName.includes(cleanNoKep) || cleanNoKep.includes(pName);
-    });
-    return match ? match.id : null;
+
+    if (clean.includes("barat") && clean.includes("nusa tenggara")) return "NTB";
+    if (clean.includes("timur") && clean.includes("nusa tenggara")) return "NTT";
+
+    if (clean.includes("jakarta")) return "DKI";
+    if (clean.includes("yogyakarta") || clean.includes("jogja")) return "DIY";
+    if (clean.includes("banten")) return "BANTEN";
+    if (clean.includes("bali")) return "BALI";
+    if (clean.includes("jawa barat")) return "JABAR";
+    if (clean.includes("jawa tengah")) return "JATENG";
+    if (clean.includes("jawa timur")) return "JATIM";
+
+    if (clean.includes("aceh") || clean.includes("nanggroe")) return "ACEH";
+    if (clean.includes("sumatera utara") || clean.includes("sumatra utara")) return "SUMUT";
+    if (clean.includes("sumatera barat") || clean.includes("sumatra barat")) return "SUMBAR";
+    if (clean.includes("jambi")) return "JAMBI";
+    if (clean.includes("sumatera selatan") || clean.includes("sumatra selatan")) return "SUMSEL";
+    if (clean.includes("bengkulu")) return "BENGKULU";
+    if (clean.includes("lampung")) return "LAMPUNG";
+
+    if (clean.includes("kalimantan barat")) return "KALBAR";
+    if (clean.includes("kalimantan tengah")) return "KALTENG";
+    if (clean.includes("kalimantan selatan")) return "KALSEL";
+    if (clean.includes("kalimantan timur")) return "KALTIM";
+    if (clean.includes("kalimantan utara")) return "KALTARA";
+
+    if (clean.includes("gorontalo")) return "GORONTALO";
+    if (clean.includes("sulawesi utara")) return "SULUT";
+    if (clean.includes("sulawesi tengah")) return "SULTENG";
+    if (clean.includes("sulawesi barat")) return "SULBAR";
+    if (clean.includes("sulawesi selatan")) return "SULSEL";
+    if (clean.includes("sulawesi tenggara")) return "SULTRA";
+
+    return null;
   };
 
   const isFeatureActive = (featureProvId, selectedId) => {
-    if (!selectedId) return false;
-    if (featureProvId === selectedId) return true;
-    const selectedProvData = INITIAL_PROVINCES.find(p => p.id === selectedId);
-    if (selectedProvData && selectedProvData.parentMapId === featureProvId) {
-      return true;
-    }
-    return false;
+    return featureProvId && selectedId && featureProvId === selectedId;
   };
 
   useEffect(() => {
@@ -228,6 +250,11 @@ const IndonesiaGeoMap = ({ selectedProvId, onSelectProvince }) => {
       }
       return { k: newScale, x: newX, y: newY };
     });
+  };
+
+  const handleResetMap = () => {
+    setTransform({ k: 1, x: 0, y: 0 });
+    onSelectProvince(''); 
   };
 
   const handleMouseDown = (e) => {
@@ -278,21 +305,28 @@ const IndonesiaGeoMap = ({ selectedProvId, onSelectProvince }) => {
   return (
     <div className="relative w-full h-full group overflow-hidden rounded-3xl bg-slate-50/30 border border-slate-100">
       
-      {/* ZOOM CONTROLS */}
       <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-1 z-20">
         <button onClick={() => handleZoom(1.2)} className="bg-white border border-slate-200 p-1.5 rounded-t-lg hover:bg-slate-50 active:bg-slate-100 transition text-slate-600 shadow-sm" title="Zoom In"><Plus className="w-4 h-4" /></button>
         <div className="h-[1px] w-full bg-slate-200"></div>
         <button onClick={() => handleZoom(0.8)} className="bg-white border border-slate-200 p-1.5 rounded-b-lg hover:bg-slate-50 active:bg-slate-100 transition text-slate-600 shadow-sm" title="Zoom Out"><Minus className="w-4 h-4" /></button>
       </div>
 
-      {/* PAN INFO */}
-      <div className="absolute top-3 left-3 z-20 flex gap-2 pointer-events-none opacity-50 hover:opacity-100 transition-opacity">
-         <div className="bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] text-slate-500 flex items-center gap-1 shadow-sm border border-slate-100">
+      <div className="absolute top-3 left-3 z-20 flex flex-col gap-2">
+         <div className="bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] text-slate-500 flex items-center gap-1 shadow-sm border border-slate-100 w-fit pointer-events-none opacity-50 hover:opacity-100 transition-opacity">
             <Move className="w-3 h-3" /> Geser Peta
          </div>
       </div>
 
-      {/* HOVER TOOLTIP */}
+      {/* RESET BUTTON (POJOK KIRI BAWAH) */}
+      <div className="absolute bottom-3 left-3 z-20">
+         <button 
+           onClick={handleResetMap}
+           className="bg-emerald-500 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-md hover:bg-emerald-600 active:scale-95 transition flex items-center gap-1.5"
+         >
+           <RotateCcw className="w-3 h-3" /> Reset Peta
+         </button>
+      </div>
+
       {hoveredName && (
         <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
           <div className="bg-slate-800/90 backdrop-blur text-white text-xs px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2">
@@ -319,15 +353,13 @@ const IndonesiaGeoMap = ({ selectedProvId, onSelectProvince }) => {
             let displayName = feature.properties.Propinsi || "Unknown";
             displayName = displayName.replace("NusaTenggara", "Nusa Tenggara");
 
-            // Tampilkan nama provinsi dari DB jika match
             const dbProv = INITIAL_PROVINCES.find(p => p.id === provId);
             if (dbProv) displayName = dbProv.name;
 
             const isHovered = hoveredName === displayName;
 
-            // REVERTED MAP COLORS (ORIGINAL GREEN/NEUTRAL)
             let fill = "#cbd5e1"; 
-            if (isSelected) fill = "#10b981"; // Original Emerald Green
+            if (isSelected) fill = "#10b981"; 
             else if (isHovered) fill = "#94a3b8"; 
             if (!provId) fill = "#e2e8f0"; 
 
@@ -355,29 +387,8 @@ const IndonesiaGeoMap = ({ selectedProvId, onSelectProvince }) => {
   );
 };
 
-// --- API BPS CONFIG ---
-const ApiConfigModal = ({ isOpen, onClose, onSave, status }) => {
-  const [key, setKey] = useState('');
-  if (!isOpen) return null;
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 border border-slate-200 animate-in fade-in zoom-in duration-300">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2"><Database className="w-5 h-5 text-[#6155F5]"/> Konfigurasi API BPS</h3>
-          <button onClick={onClose} className="p-1 hover:bg-slate-100 rounded-full transition"><X className="w-5 h-5 text-slate-500" /></button>
-        </div>
-        <div className="space-y-4">
-          <div className="p-3 bg-indigo-50 rounded-lg text-xs text-indigo-800 leading-relaxed border border-indigo-100"><strong>Info:</strong> Fitur ini memungkinkan aplikasi mengambil data <em>Live</em> dari BPS.</div>
-          <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">WebAPI Key BPS</label>
-            <input type="text" placeholder="Paste Key BPS kamu disini..." className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#6155F5] outline-none" value={key} onChange={(e) => setKey(e.target.value)}/>
-          </div>
-          <button onClick={() => onSave(key)} className="w-full bg-[#6155F5] hover:opacity-90 text-white font-semibold py-2.5 rounded-lg flex items-center justify-center gap-2 transition">{status === 'loading' ? <RefreshCcw className="w-4 h-4 animate-spin"/> : <Save className="w-4 h-4"/>} Simpan & Ambil Data</button>
-        </div>
-      </div>
-    </div>
-  );
-};
+// --- API BPS CONFIG (REMOVED - OFFLINE MODE) ---
+// ... dihapus sesuai instruksi ...
 
 // --- MAIN COMPONENT ---
 export default function SalaryMapApp() {
@@ -386,51 +397,43 @@ export default function SalaryMapApp() {
   const [dependents, setDependents] = useState('1'); 
   const [selectedProvId, setSelectedProvId] = useState('');
   const [result, setResult] = useState(null);
-  
-  const [showApiConfig, setShowApiConfig] = useState(false);
-  const [apiStatus, setApiStatus] = useState('idle');
-  const [dataSource, setDataSource] = useState('Data BPS 2024 (Updated)');
 
   const formatRupiah = (number) => {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
   };
 
-  const handleFetchBPS = async (key) => {
-    if (!key) return;
-    setApiStatus('loading');
-    const url = `https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/25/tahun/2024/id_tabel/WVJ1ekI3NzNYeFNqVDdaUjRoWHVjQT09/wilayah/0000000/key/${key}`;
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      if (data && data['data-content']) {
-         setDataSource('BPS Live (Simulated)');
-         setApiStatus('success');
-         setShowApiConfig(false);
-         alert("Koneksi ke BPS berhasil diinisiasi!");
-      } else {
-         throw new Error("Struktur Data tidak dikenali");
-      }
-    } catch (error) {
-      console.error("BPS Fetch Error:", error);
-      setApiStatus('error');
-      alert(`Gagal mengambil data BPS: ${error.message}`);
+  const handleSalaryChange = (e) => {
+    const rawVal = e.target.value.replace(/\D/g, '');
+    if (rawVal === '') {
+      setSalary('');
+      return;
     }
+    const formatted = new Intl.NumberFormat('id-ID').format(parseInt(rawVal));
+    setSalary(formatted);
   };
 
   const handleDependentsChange = (e) => {
     const val = e.target.value;
-    if (val === '') setDependents('');
-    else if (/^\d+$/.test(val)) setDependents(val);
+    if (val === '') {
+      setDependents('');
+    } else if (/^\d+$/.test(val)) {
+      setDependents(val);
+    }
   };
 
+  // --- AUTO CALCULATION ---
   useEffect(() => {
     if (!salary || !selectedProvId || dependents === '') {
       if (result) setResult(null); 
       return;
     }
 
+    const cleanSalary = salary.replace(/\./g, '');
+    const numSalary = parseFloat(cleanSalary);
+    
+    if (isNaN(numSalary)) return;
+
     const province = provincesData.find(p => p.id === selectedProvId);
-    const numSalary = parseFloat(salary);
     const numDependents = Math.max(1, parseInt(dependents) || 1); 
     
     const totalFamilyExpense = province.expense * numDependents;
@@ -476,7 +479,7 @@ export default function SalaryMapApp() {
         color: 'text-gray-700', 
         bgColor: 'bg-gray-100',
         borderColor: 'border-gray-300',
-        needsBarColor: 'bg-emerald-500', // Update: Cukup use Green bar
+        needsBarColor: 'bg-emerald-500', 
         icon: <CheckCircle2 className="w-8 h-8 text-gray-700" />,
       };
       analysisDesc = `Kondisi keuanganmu tergolong sehat. Kamu bisa memenuhi kebutuhan dasar dengan baik dan memiliki sisa dana sekitar ${formatRupiah(netSavings)} per bulan untuk tabungan atau dana darurat.`;
@@ -519,81 +522,92 @@ export default function SalaryMapApp() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="bg-[#6155F5] p-2 rounded-lg"><BarChartBig className="w-5 h-5 text-white" /></div>
-            <span className="font-bold text-xl tracking-tight text-slate-900">Cek<span className="text-[#6155F5]">Gajiku</span></span>
+            <span className="font-bold text-xl tracking-tight text-slate-900">Kalkulator <span className="text-slate-900">Gaji UMR</span></span>
           </div>
-          {/* Removed Right Side Content as requested */}
         </div>
       </nav>
 
-      <ApiConfigModal isOpen={showApiConfig} onClose={() => setShowApiConfig(false)} onSave={handleFetchBPS} status={apiStatus} />
-
       {/* HERO & CONTENT */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
-        <div className="w-full text-center mb-12 max-w-3xl mx-auto animate-fade-in-up">
-          <h1 className="text-4xl lg:text-6xl font-extrabold text-slate-900 mb-6 leading-tight">Seberapa Bernilai <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6155F5] to-[#8b82ff]">Gaji Kamu?</span></h1>
-          <p className="text-lg text-slate-600 leading-relaxed">Hitung beban pengeluaran kamu berdasarkan UMR, rerata pengeluaran per kapita per bulan, dan jumlah tanggungan keluarga di setiap provinsi.</p>
-        </div>
-
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
-          {/* LEFT COLUMN: Input Section */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 p-6 md:p-8 relative overflow-hidden">
-               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#6155F5] via-[#8b82ff] to-[#a39aff]"></div>
-              <div className="space-y-6">
-                
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-700 flex items-center gap-2"><Wallet className="w-4 h-4 text-[#6155F5]" />Penghasilan Bulanan</label>
-                  <div className="relative group">
-                    <span className="absolute left-4 top-3.5 text-slate-400 font-bold group-focus-within:text-[#6155F5] transition-colors">Rp</span>
-                    <input type="number" className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-lg font-semibold rounded-xl focus:ring-2 focus:ring-[#6155F5] focus:border-[#6155F5] block w-full pl-12 p-3 transition-all outline-none" placeholder="Contoh: 5000000" value={salary} onChange={(e) => setSalary(e.target.value)} required />
-                  </div>
-                  <p className="text-[11px] text-slate-400 italic ml-1">*Nominal gaji bersih dikurangi pajak</p>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-700 flex items-center gap-2"><Users className="w-4 h-4 text-[#6155F5]" />Jumlah Tanggungan (Termasuk kamu)</label>
-                  <div className="relative group">
-                    <input type="text" className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-lg font-semibold rounded-xl focus:ring-2 focus:ring-[#6155F5] focus:border-[#6155F5] block w-full pl-4 p-3 transition-all outline-none" placeholder="Minimal 1 orang" value={dependents} onChange={handleDependentsChange} required />
-                    <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-400 text-sm font-medium">Orang</div>
-                  </div>
-                  <p className="text-xs text-slate-400 italic">*Masukkan 1 jika kamu lajang (menanggung diri sendiri)</p>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-700 flex items-center gap-2"><MapPin className="w-4 h-4 text-[#6155F5]" />Pilih Provinsi</label>
-                  <div className="relative group">
-                    <select className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#6155F5] focus:border-[#6155F5] block w-full p-3 pr-10 appearance-none cursor-pointer outline-none transition-all" value={selectedProvId} onChange={(e) => setSelectedProvId(e.target.value)} required>
-                      <option value="" disabled>-- Pilih Lokasi --</option>
-                      {provincesData.map(prov => (<option key={prov.id} value={prov.id}>{prov.name}</option>))}
-                    </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-500 group-focus-within:text-[#6155F5] transition-colors"><Search className="w-4 h-4" /></div>
-                  </div>
-                  <p className="text-xs text-[#6155F5] italic pt-1 flex items-center gap-1"><Info className="w-3 h-3"/> Klik peta untuk pilih provinsi secara otomatis.</p>
-                </div>
-              </div>
-            </div>
+      <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        
+        {/* HEADER & INPUT SECTION (CENTERED) */}
+        <div className="max-w-2xl mx-auto mb-10">
+          {/* TITLE & DESCRIPTION */}
+          <div className="text-center mb-8 animate-fade-in-up">
+            <h1 className="text-3xl lg:text-5xl font-semibold text-slate-900 mb-4 leading-tight">
+              Seberapa Bernilai <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6155F5] to-[#8b82ff]">Gaji Kamu?</span>
+            </h1>
+            <p className="text-base text-slate-600 leading-relaxed max-w-lg mx-auto">
+              Hitung beban pengeluaran kamu berdasarkan UMR, rerata pengeluaran per kapita per bulan, dan jumlah tanggungan keluarga di setiap provinsi.
+            </p>
           </div>
 
-          {/* RIGHT COLUMN: Map & Result Visualization */}
-          <div className="lg:col-span-7 flex flex-col gap-6">
-            
-            {/* MAP CARD */}
-            <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-2 h-[350px] md:h-[400px] relative overflow-hidden group">
-               <div className="w-full h-full flex items-center justify-center bg-slate-50/30">
-                 <IndonesiaGeoMap selectedProvId={selectedProvId} onSelectProvince={setSelectedProvId} />
-               </div>
-               {!selectedProvId && (
-                 <div className="absolute bottom-6 left-0 right-0 flex justify-center pointer-events-none">
-                   <p className="text-xs md:text-sm font-medium text-slate-500 bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow-sm border border-slate-100 animate-bounce-slow">👆 Klik provinsi di peta untuk analisa cepat</p>
-                 </div>
-               )}
-            </div>
+          {/* INPUT CARD */}
+          <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 p-6 md:p-8 relative overflow-hidden">
+             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#6155F5] via-[#8b82ff] to-[#a39aff]"></div>
+             <div className="space-y-5">
+              
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-slate-700 flex items-center gap-2"><Wallet className="w-4 h-4 text-[#6155F5]" />Penghasilan Bulanan</label>
+                <div className="relative group">
+                  <span className="absolute left-4 top-3.5 text-slate-400 font-bold group-focus-within:text-[#6155F5] transition-colors">Rp</span>
+                  <input 
+                    type="text" 
+                    inputMode="numeric"
+                    className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-lg font-semibold rounded-xl focus:ring-2 focus:ring-[#6155F5] focus:border-[#6155F5] block w-full pl-12 p-3 transition-all outline-none" 
+                    placeholder="Contoh: 5.000.000" 
+                    value={salary} 
+                    onChange={handleSalaryChange} 
+                    required 
+                  />
+                </div>
+                <p className="text-[11px] text-slate-400 italic ml-1">*Nominal gaji bersih dikurangi pajak</p>
+              </div>
 
-            {/* RESULT CARD */}
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-slate-700 flex items-center gap-2"><Users className="w-4 h-4 text-[#6155F5]" />Jumlah Tanggungan (Termasuk kamu)</label>
+                <div className="relative group">
+                  <input type="text" className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-lg font-semibold rounded-xl focus:ring-2 focus:ring-[#6155F5] focus:border-[#6155F5] block w-full pl-4 p-3 transition-all outline-none" placeholder="Minimal 1 orang" value={dependents} onChange={handleDependentsChange} required />
+                  <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-400 text-sm font-medium">Orang</div>
+                </div>
+                <p className="text-xs text-slate-400 italic">*Masukkan 1 jika kamu lajang (menanggung diri sendiri)</p>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-slate-700 flex items-center gap-2"><MapPin className="w-4 h-4 text-[#6155F5]" />Pilih Provinsi</label>
+                <div className="relative group">
+                  <select className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#6155F5] focus:border-[#6155F5] block w-full p-3 pr-10 appearance-none cursor-pointer outline-none transition-all" value={selectedProvId} onChange={(e) => setSelectedProvId(e.target.value)} required>
+                    <option value="" disabled>-- Pilih Lokasi --</option>
+                    {provincesData.map(prov => (<option key={prov.id} value={prov.id}>{prov.name}</option>))}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-500 group-focus-within:text-[#6155F5] transition-colors"><Search className="w-4 h-4" /></div>
+                </div>
+                <p className="text-xs text-[#6155F5] italic pt-1 flex items-center gap-1"><Info className="w-3 h-3"/> Klik peta untuk pilih provinsi secara otomatis.</p>
+              </div>
+             </div>
+          </div>
+        </div>
+
+        {/* BOTTOM SECTION: MAP + ANALYSIS (HORIZONTAL on Desktop, STACK on Mobile) */}
+        <div className="grid lg:grid-cols-2 gap-6 items-stretch w-full">
+          
+          {/* LEFT: MAP CARD */}
+          <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-2 h-[400px] lg:h-auto min-h-[400px] relative overflow-hidden group flex flex-col">
+             <div className="w-full h-full flex items-center justify-center bg-slate-50/30 relative rounded-2xl overflow-hidden">
+               <IndonesiaGeoMap selectedProvId={selectedProvId} onSelectProvince={setSelectedProvId} />
+             </div>
+             {!selectedProvId && (
+               <div className="absolute bottom-6 left-0 right-0 flex justify-center pointer-events-none">
+                 <p className="text-xs md:text-sm font-medium text-slate-500 bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow-sm border border-slate-100 animate-bounce-slow">👆 Klik provinsi di peta untuk analisa cepat</p>
+               </div>
+             )}
+          </div>
+
+          {/* RIGHT: RESULT CARD */}
+          <div className="h-full w-full">
             {result ? (
-              <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden animate-in slide-in-from-bottom-4 duration-500 ring-1 ring-slate-100">
-                <div className="p-6 md:p-8 space-y-8">
+              <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden animate-in slide-in-from-bottom-4 duration-500 ring-1 ring-slate-100 h-full flex flex-col" id="result-section">
+                <div className="p-6 md:p-8 space-y-4 flex-grow">
                   
                   {/* SECTION 1: UMR ANALYSIS */}
                   <div className="space-y-4">
@@ -613,9 +627,9 @@ export default function SalaryMapApp() {
                   <div className="h-px bg-slate-100 w-full"></div>
 
                   {/* SECTION 2: FINANCIAL STATUS (LEFT ALIGNED) */}
-                  <div className="bg-slate-50 rounded-xl p-6 text-left border border-slate-100">
-                      <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Status Keuangan Kamu</p>
-                      <div className="flex items-center justify-start gap-3 mb-3">
+                  <div className="bg-slate-50 rounded-xl p-5 text-left border border-slate-100">
+                      <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Status Keuangan Kamu</p>
+                      <div className="flex items-center justify-start gap-3 mb-2">
                          {result.icon}
                          <h2 className={`text-3xl font-bold ${result.color}`}>{result.label}</h2>
                       </div>
@@ -627,7 +641,7 @@ export default function SalaryMapApp() {
                   <div className="h-px bg-slate-100 w-full"></div>
 
                   {/* SECTION 3: RINCIAN & NEEDS */}
-                  <div className="space-y-6">
+                  <div className="space-y-4">
                     <h4 className="text-sm font-bold text-slate-800 flex items-center gap-2"><Scale className="w-4 h-4 text-[#6155F5]"/> Analisis Pengeluaran Bulanan Kamu</h4>
                     
                     <div className="space-y-1">
@@ -640,7 +654,7 @@ export default function SalaryMapApp() {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
                        <div className="text-center sm:text-left">
                           <p className="text-[10px] uppercase tracking-wide text-slate-400 font-semibold mb-1">Pemasukan</p>
-                          <p className="text-sm font-bold text-[#6155F5]">{formatRupiah(result.userSalary)}</p>
+                          <p className="text-sm font-bold text-blue-600">{formatRupiah(result.userSalary)}</p>
                        </div>
                        <div className="text-center sm:text-left border-t sm:border-t-0 sm:border-l border-slate-100 pt-3 sm:pt-0 sm:pl-4">
                           <p className="text-[10px] uppercase tracking-wide text-slate-400 font-semibold mb-1">Total Kebutuhan ({result.numDependents} Orang)</p>
@@ -662,15 +676,15 @@ export default function SalaryMapApp() {
                 </div>
               </div>
             ) : (
-              <div className="hidden md:flex h-full min-h-[200px] bg-slate-50/50 rounded-3xl border-2 border-dashed border-slate-200 flex-col items-center justify-center text-center p-8">
+              <div className="bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-center p-8 h-full min-h-[400px]">
                 <div className="bg-white p-4 rounded-full shadow-sm mb-4"><TrendingUp className="w-8 h-8 text-slate-300" /></div>
                 <h3 className="text-slate-500 font-medium">Menunggu Data</h3>
-                <p className="text-sm text-slate-400 mt-1 max-w-xs">Isi formulir di sebelah kiri untuk melihat analisis perbandingan gaji dan beban keluarga kamu.</p>
+                <p className="text-sm text-slate-400 mt-1 max-w-xs">Analisa penghasilan dan pengeluaran bulanan kamu akan muncul disini.</p>
               </div>
             )}
-
           </div>
         </div>
+
       </main>
 
       {/* FOOTER */}
