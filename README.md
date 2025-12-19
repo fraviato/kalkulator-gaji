@@ -1,16 +1,21 @@
-# React + Vite
+# 💰 Kalkulator Gaji & UMR
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web sederhana untuk menghitung **Pemasukan Bersih** setelah dipotong pajak/BPJS, dan membandingkannya dengan UMR serta estimasi biaya hidup di berbagai provinsi di Indonesia.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [https://kalkulator-gaji-umr.vercel.app](https://kalkulator-gaji-umr.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🤖 About This Project
+Project ini adalah hasil eksperimen ngoding sederhana menggunakan bantuan **AI (Google Gemini 3 Pro)**.
+Dibuat oleh [@fraviato](https://x.com/fraviato)
 
-## React Compiler
+Porsi pengerjaan hingga rilis sejauh ini:
+- 70% disediakan dari Gemini 3 Pro (struktur & rancangan kode, logic perhitungan kalkulator, design awal & layout)
+- 30% oleh saya sendiri (mengumpulkan & menyaring data survei BPS, penyesuaian angka gaji & rerata pengeluaran pada kode secara manual, input layout warna & tampilan)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Fitur Utama
+- 🏙️ **Komparasi UMR:** Bandingkan penghasilan bersih kamu dengan UMR di 38 Provinsi.
+- 📉 **Cek Biaya Hidup:** Bandingkan penghasilan bersih dengan estimasi biaya hidup dan pengeluaran per kapita (BPS), menyesuaikan jumlah tanggungan yang ditulis.
 
-## Expanding the ESLint configuration
+⚡ **Tech Stack:** React + Vite + Tailwind CSS
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Dibuka untuk kontributor. Feel free to pull request! 🤝
