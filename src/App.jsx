@@ -20,56 +20,57 @@ import {
   X,
   Save,
   MessageCircle,
-  RotateCcw
+  RotateCcw,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 
-// --- DATA INITIAL (38 PROVINSI - FIXED VALUES SESUAI CSV BPS 2025) ---
+// --- DATA INITIAL (38 PROVINSI - UPDATE UMP 2026 & KHL DES 2025) ---
 const INITIAL_PROVINCES = [
   // SUMATERA
-  { id: 'ACEH', name: 'Aceh', umr: 3685616, expense: 1299756 },
-  { id: 'SUMUT', name: 'Sumatera Utara', umr: 2992559, expense: 1397887 },
-  { id: 'SUMBAR', name: 'Sumatera Barat', umr: 2994193, expense: 1542109 },
-  { id: 'RIAU', name: 'Riau', umr: 3508776, expense: 1610427 },
-  { id: 'JAMBI', name: 'Jambi', umr: 3234535, expense: 1477104 },
-  { id: 'SUMSEL', name: 'Sumatera Selatan', umr: 3681571, expense: 1283538 },
-  { id: 'BENGKULU', name: 'Bengkulu', umr: 2670039, expense: 1498744 },
-  { id: 'LAMPUNG', name: 'Lampung', umr: 2893070, expense: 1239613 },
-  { id: 'BABEL', name: 'Kep. Bangka Belitung', umr: 3876600, expense: 1765551 },
-  { id: 'KEPRI', name: 'Kepulauan Riau', umr: 3623654, expense: 2468319 },
+  { id: 'ACEH', name: 'Aceh', umr: 3685616, expense: 3654466 },
+  { id: 'SUMUT', name: 'Sumatera Utara', umr: 3228971, expense: 3599803 },
+  { id: 'SUMBAR', name: 'Sumatera Barat', umr: 3182955, expense: 4076173 },
+  { id: 'RIAU', name: 'Riau', umr: 3780495, expense: 4158948 },
+  { id: 'JAMBI', name: 'Jambi', umr: 3471497, expense: 3931596 },
+  { id: 'SUMSEL', name: 'Sumatera Selatan', umr: 3942963, expense: 3299907 },
+  { id: 'BENGKULU', name: 'Bengkulu', umr: 2827250, expense: 3714932 },
+  { id: 'LAMPUNG', name: 'Lampung', umr: 3047734, expense: 3343494 },
+  { id: 'BABEL', name: 'Kep. Bangka Belitung', umr: 4035000, expense: 4714805 },
+  { id: 'KEPRI', name: 'Kepulauan Riau', umr: 3879520, expense: 5717082 },
   // JAWA & BALI NUSA
-  { id: 'DKI', name: 'DKI Jakarta', umr: 5396761, expense: 2962412 },
-  { id: 'JABAR', name: 'Jawa Barat', umr: 2191232, expense: 1724367 },
-  { id: 'JATENG', name: 'Jawa Tengah', umr: 2169349, expense: 1337028 },
-  { id: 'DIY', name: 'DI Yogyakarta', umr: 2264080, expense: 1843212 },
-  { id: 'JATIM', name: 'Jawa Timur', umr: 2305985, expense: 1419140 },
-  { id: 'BANTEN', name: 'Banten', umr: 2905119, expense: 1750546 },
-  { id: 'BALI', name: 'Bali', umr: 2996561, expense: 1964618 },
-  { id: 'NTB', name: 'Nusa Tenggara Barat', umr: 2602931, expense: 1402118 },
-  { id: 'NTT', name: 'Nusa Tenggara Timur', umr: 2328969, expense: 1028875 },
+  { id: 'DKI', name: 'DKI Jakarta', umr: 5729876, expense: 5898511 },
+  { id: 'JABAR', name: 'Jawa Barat', umr: 2317601, expense: 4122871 },
+  { id: 'JATENG', name: 'Jawa Tengah', umr: 2327386, expense: 3512997 },
+  { id: 'DIY', name: 'DI Yogyakarta', umr: 2417495, expense: 4604982 },
+  { id: 'JATIM', name: 'Jawa Timur', umr: 2446880, expense: 3575938 },
+  { id: 'BANTEN', name: 'Banten', umr: 3100881, expense: 4295985 },
+  { id: 'BALI', name: 'Bali', umr: 3207459, expense: 5253107 },
+  { id: 'NTB', name: 'Nusa Tenggara Barat', umr: 2673861, expense: 3410833 },
+  { id: 'NTT', name: 'Nusa Tenggara Timur', umr: 2455898, expense: 3054508 },
   // KALIMANTAN
-  { id: 'KALBAR', name: 'Kalimantan Barat', umr: 2878286, expense: 1469934 },
-  { id: 'KALTENG', name: 'Kalimantan Tengah', umr: 3473621, expense: 1596165 },
-  { id: 'KALSEL', name: 'Kalimantan Selatan', umr: 3496195, expense: 1603501 },
-  { id: 'KALTIM', name: 'Kalimantan Timur', umr: 3579313, expense: 2117354 },
-  { id: 'KALTARA', name: 'Kalimantan Utara', umr: 3580160, expense: 1726451 },
+  { id: 'KALBAR', name: 'Kalimantan Barat', umr: 3054552, expense: 4083420 },
+  { id: 'KALTENG', name: 'Kalimantan Tengah', umr: 3686138, expense: 4279888 },
+  { id: 'KALSEL', name: 'Kalimantan Selatan', umr: 3725000, expense: 4112552 },
+  { id: 'KALTIM', name: 'Kalimantan Timur', umr: 3762431, expense: 5735353 },
+  { id: 'KALTARA', name: 'Kalimantan Utara', umr: 3775243, expense: 4968935 },
   // SULAWESI
-  { id: 'SULUT', name: 'Sulawesi Utara', umr: 3775425, expense: 1410504 },
-  { id: 'SULTENG', name: 'Sulawesi Tengah', umr: 2915000, expense: 1256394 },
-  { id: 'SULSEL', name: 'Sulawesi Selatan', umr: 3657527, expense: 1358821 },
-  { id: 'SULTRA', name: 'Sulawesi Tenggara', umr: 3073551, expense: 1325085 },
-  { id: 'GORONTALO', name: 'Gorontalo', umr: 3221731, expense: 1315738 },
-  { id: 'SULBAR', name: 'Sulawesi Barat', umr: 3104430, expense: 1069314 },
+  { id: 'SULUT', name: 'Sulawesi Utara', umr: 4002630, expense: 3864224 },
+  { id: 'SULTENG', name: 'Sulawesi Tengah', umr: 3179565, expense: 3546013 },
+  { id: 'SULSEL', name: 'Sulawesi Selatan', umr: 3921088, expense: 3670085 },
+  { id: 'SULTRA', name: 'Sulawesi Tenggara', umr: 3306496, expense: 3645086 },
+  { id: 'GORONTALO', name: 'Gorontalo', umr: 3405144, expense: 3398395 },
+  { id: 'SULBAR', name: 'Sulawesi Barat', umr: 3315934, expense: 3091442 },
   // MALUKU & PAPUA
-  { id: 'MALUKU', name: 'Maluku', umr: 3141700, expense: 1398498 },
-  { id: 'MALUT', name: 'Maluku Utara', umr: 3408000, expense: 1492532 },
+  { id: 'MALUKU', name: 'Maluku', umr: 3334490, expense: 4168498 },
+  { id: 'MALUT', name: 'Maluku Utara', umr: 3510240, expense: 4431339 },
   // PAPUA RAYA
-  { id: 'PAPUA', name: 'Papua', umr: 4285850, expense: 1810767 },
-  { id: 'PAPUABAR', name: 'Papua Barat', umr: 3615000, expense: 1705338 },
-  // Pemekaran (Tanpa parentMapId)
-  { id: 'PAPUSEL', name: 'Papua Selatan', umr: 4285850, expense: 1517419 },
-  { id: 'PAPUTENG', name: 'Papua Tengah', umr: 4285848, expense: 1459088 },
-  { id: 'PAPUPEG', name: 'Papua Pegunungan', umr: 4285847, expense: 1941997 },
-  { id: 'PAPUBARDA', name: 'Papua Barat Daya', umr: 3614000, expense: 1816875 },
+  { id: 'PAPUA', name: 'Papua', umr: 4436283, expense: 5314281 },
+  { id: 'PAPUABAR', name: 'Papua Barat', umr: 3841000, expense: 5246172 },
+  { id: 'PAPUSEL', name: 'Papua Selatan', umr: 4508100, expense: 5314281 },
+  { id: 'PAPUTENG', name: 'Papua Tengah', umr: 4285848, expense: 5314281 },
+  { id: 'PAPUPEG', name: 'Papua Pegunungan', umr: 4508714, expense: 5314281 },
+  { id: 'PAPUBARDA', name: 'Papua Barat Daya', umr: 3766000, expense: 5246172 },
 ];
 
 // --- GEOJSON MAP COMPONENT ---
@@ -387,9 +388,6 @@ const IndonesiaGeoMap = ({ selectedProvId, onSelectProvince }) => {
   );
 };
 
-// --- API BPS CONFIG (REMOVED - OFFLINE MODE) ---
-// ... dihapus sesuai instruksi ...
-
 // --- MAIN COMPONENT ---
 export default function SalaryMapApp() {
   const [provincesData, setProvincesData] = useState(INITIAL_PROVINCES);
@@ -397,6 +395,7 @@ export default function SalaryMapApp() {
   const [dependents, setDependents] = useState('1'); 
   const [selectedProvId, setSelectedProvId] = useState('');
   const [result, setResult] = useState(null);
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
   const formatRupiah = (number) => {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
@@ -514,6 +513,17 @@ export default function SalaryMapApp() {
 
   }, [salary, dependents, selectedProvId, provincesData]); 
 
+  const faqs = [
+    {
+      question: "Apakah angka UMR disini akurat?",
+      answer: "Angka Upah Minimum di kalkulator ini menggunakan data resmi tahun 2026 - kecuali untuk provinsi Aceh, karena sementara ini angka yang digunakan adalah standar tahun 2025 dikarenakan pemerintah setempat menetapkan status darurat bencana banjir di akhir tahun 2025, yang mengakibatkan penundaan penetapan kenaikan upah minimum untuk tahun 2026."
+    },
+    {
+      question: "Apa itu angka KHL? Dan apakah akurat untuk perhitungan kebutuhan hidup?",
+      answer: "Angka KHL (Kebutuhan Hidup Layak) adalah metode perhitungan bersifat normatif yang menghitung biaya dari 64 komponen kebutuhan riil (makanan, tempat tinggal, kesehatan, pendidikan, hingga rekreasi) agar seseorang dapat hidup dengan layak dan bermartabat sesuai standar internasional (ILO). Angka yang tertera di kalkulator ini adalah data resmi dari Kemenaker RI per Desember 2025. Namun, perlu diingat bahwa kebutuhan hidup tiap individu atau keluarga bisa berbeda-beda tergantung gaya hidup, lokasi, dan kondisi ekonomi masing-masing."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800" style={{ fontFamily: '"Tiktok Sans", "Helvetica", "Inter", sans-serif' }}>
       
@@ -538,7 +548,7 @@ export default function SalaryMapApp() {
               Seberapa Bernilai <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6155F5] to-[#8b82ff]">Gaji Kamu?</span>
             </h1>
             <p className="text-base text-slate-600 leading-relaxed max-w-lg mx-auto">
-              Hitung beban pengeluaran kamu berdasarkan UMR, rerata pengeluaran per kapita per bulan, dan jumlah tanggungan keluarga di setiap provinsi.
+              Hitung beban pengeluaran kamu berdasarkan upah minimum, estimasi pengeluaran per kapita per bulan, dan jumlah tanggungan keluarga di setiap provinsi.
             </p>
           </div>
 
@@ -670,7 +680,7 @@ export default function SalaryMapApp() {
                     </div>
                     
                     <div className="text-xs text-slate-400 italic text-center mt-4">
-                         Data pengeluaran/kapita yang ada di website ini diambil dari <a href="https://www.bps.go.id/id/statistics-table/1/OTQ1IzE=/rata-rata-pengeluaran-per-kapita-sebulan-untuk-makanan-dan-bukan-makanan-di-daerah-perkotaan-dan-perdesaan-menurut-provinsi--rupiah---2011-2025.html" target="_blank" rel="noopener noreferrer" className="text-[#6155F5] hover:underline">Laporan Statistik Pengeluaran per Kapita Sebulan di Daerah Perkotaan dan Perdesaan Menurut Provinsi 2025 </a>.
+                         Data pengeluaran/kapita yang ada di website ini diambil berdasarkan <a href="https://www.instagram.com/p/DSfOLNHE8Kr/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer" className="text-[#6155F5] hover:underline">Metode Perhitungan KHL resmi dari Kementerian Ketenagakerjaan</a> di bulan Desember 2025.
                     </div>
                   </div>
                 </div>
@@ -682,6 +692,40 @@ export default function SalaryMapApp() {
                 <p className="text-sm text-slate-400 mt-1 max-w-xs">Analisa penghasilan dan pengeluaran bulanan kamu akan muncul disini.</p>
               </div>
             )}
+          </div>
+        </div>
+
+        {/* FAQ SECTION */}
+        <div className="max-w-4xl mx-auto mt-16 space-y-6">
+          <div className="flex items-center gap-3 mb-8">
+            <div>
+              <h2 className="text-2xl font-bold text-slate-900">Frequently Asked Question</h2>
+            </div>
+          </div>
+
+          <div className="grid gap-4">
+            {faqs.map((faq, index) => (
+              <div 
+                key={index}
+                className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:border-[#6155F5]/30 transition-all cursor-pointer"
+                onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
+              >
+                <div className="p-5 flex items-center justify-between select-none">
+                  <h3 className="font-bold text-slate-800 text-lg flex items-center gap-3">
+                    {faq.question}
+                  </h3>
+                  {openFaqIndex === index ? <ChevronUp className="text-slate-400 w-5 h-5" /> : <ChevronDown className="text-slate-400 w-5 h-5" />}
+                </div>
+                {openFaqIndex === index && (
+                  <div className="px-5 pb-5 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <div className="h-px bg-slate-100 mb-4 w-full"></div>
+                    <p className="text-slate-600 leading-relaxed text-sm">
+                      {faq.answer}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
 
@@ -701,7 +745,7 @@ export default function SalaryMapApp() {
              className="bg-black text-white px-6 py-2 rounded-full font-bold text-sm hover:bg-slate-900 transition flex items-center gap-2"
            >
              <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-             DM saya @fraviato
+             DM @fraviato
            </a>
         </div>
       </footer>
